@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Proyek | Rikho Ariesky Rowardo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile">
+                <img src="../images/profile.jpg" alt="Rikho Ariesky Rowardo">
+                <h1>Rikho Ariesky Rowardo</h1>
+                <p>Sarjana Teknik Informatika | Web Developer</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html#about">Tentang Saya</a></li>
+                    <li><a href="../index.html#experience">Pengalaman</a></li>
+                    <li><a href="../index.html#projects">Proyek</a></li>
+                    <li><a href="../index.html#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="project-details">
+        <div class="container">
+            <div id="project-content">
+                <!-- Content will be loaded by JavaScript -->
+            </div>
+            <a href="../index.html#projects" class="btn back-btn">Kembali ke Portofolio</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Rikho Ariesky Rowardo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Project data
+        const projects = {
+            1: {
+                title: "Website Kelurahan Desa Klapanunggal",
+                description: "Membangun website profil resmi Kelurahan Klapanunggal sebagai media informasi publik, yang memuat data kelurahan, berita terkini, layanan administrasi, dan dokumentasi kegiatan masyarakat.",
+                technologies: ["PHP", "Codeigniter", "MySQL", "HTML/CSS", "JavaScript"],
+                images: ["project-1-1.jpg", "project-1-2.jpg"]
+            },
+            2: {
+                title: "Aplikasi Pencatatan Keuangan Toko Dubasta",
+                description: "Mengembangkan sistem keuangan berbasis web untuk Toko Dubasta guna mencatat pemasukan, pengeluaran, laporan laba rugi, dan transaksi penjualan secara real-time dan efisien.",
+                technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript"],
+                images: ["project-2-1.jpg", "project-2-2.jpg"]
+            },
+            3: {
+                title: "Aplikasi PT. Setia Jayatama Logistik",
+                description: "Merancang dan membangun aplikasi web untuk mendigitalisasi proses logistik, termasuk pencatatan penerimaan dan pengiriman barang, pengelolaan invoice, serta operasional harian perusahaan ekspedisi.",
+                technologies: ["PHP", "Codeigniter", "MySQL", "jQuery"],
+                images: ["project-3-1.jpg", "project-3-2.jpg"]
+            }
+        };
+
+        // Get project ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('id');
+        const project = projects[projectId];
+
+        // Display project details
+        if (project) {
+            const projectContent = document.getElementById('project-content');
+            
+            let imagesHTML = '';
+            if (project.images && project.images.length > 0) {
+                imagesHTML = '<div class="project-gallery">';
+                project.images.forEach(img => {
+                    imagesHTML += `<img src="../images/${img}" alt="${project.title}">`;
+                });
+                imagesHTML += '</div>';
+            }
+            
+            let techHTML = '';
+            if (project.technologies && project.technologies.length > 0) {
+                techHTML = '<div class="project-tech"><h3>Teknologi yang Digunakan:</h3><ul>';
+                project.technologies.forEach(tech => {
+                    techHTML += `<li>${tech}</li>`;
+                });
+                techHTML += '</ul></div>';
+            }
+            
+            projectContent.innerHTML = `
+                <h2>${project.title}</h2>
+                ${imagesHTML}
+                <div class="project-description">
+                    <h3>Deskripsi Proyek</h3>
+                    <p>${project.description}</p>
+                </div>
+                ${techHTML}
+            `;
+        } else {
+            document.getElementById('project-content').innerHTML = `
+                <div class="project-not-found">
+                    <h2>Proyek tidak ditemukan</h2>
+                    <p>Proyek yang Anda cari tidak tersedia.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
